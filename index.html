@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>wadoru | RHYTHM GAMER</title>
-<meta name="description" content="wadoru PlayGaming — リズムゲームを中心にYouTubeで実況・ライブ配信をするゲーマー、wadoruのページ。">
+<meta id="meta-desc" name="description" content="wadoru PlayGaming — リズムゲームを中心にYouTubeで実況・ライブ配信をするゲーマー、wadoruのページ。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -85,7 +85,33 @@
   .hero-top {
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
   }
+
+  .lang-toggle {
+    display: inline-flex;
+    border: 2px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .lang-toggle button {
+    font-family: "DotGothic16", monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 7px 12px;
+    background: var(--bg-panel);
+    color: var(--muted);
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .lang-toggle button + button { border-left: 2px solid var(--border); }
+  .lang-toggle button.active { background: var(--olive); color: var(--bg); }
+  .lang-toggle button:hover:not(.active) { color: var(--cream); }
+  .lang-toggle button:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
 
   .hero-identity {
     display: flex;
@@ -425,6 +451,10 @@
   <div class="wrap">
     <div class="hero-top">
       <span class="badge-tag"><span class="dot"></span>RHYTHM GAMER</span>
+      <div class="lang-toggle" role="group" aria-label="Language / 言語">
+        <button type="button" data-lang="ja" class="active">JA</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
     </div>
 
     <div class="hero-identity">
@@ -437,7 +467,7 @@
       </h1>
     </div>
     <p class="hero-tagline">No Game, No Life.</p>
-    <p class="hero-sub">趣味でゲームの発信をしているゲーマーです。<br>YouTubeを中心に、ライブ配信や動画投稿を行っています。<br>X・noteでは、マイペースに活動しています。</p>
+    <p class="hero-sub" data-i18n="hero-sub">趣味でゲームの発信をしているゲーマーです。<br>YouTubeを中心に、ライブ配信や動画投稿を行っています。<br>X・noteでは、マイペースに活動しています。</p>
 
     <div class="hero-actions">
       <a class="btn-start" href="https://www.youtube.com/channel/UCklMWopjIFk57JWiN_zoojg" target="_blank" rel="noopener">▶ PRESS START</a>
@@ -452,7 +482,7 @@
 <section class="tracks">
   <div class="wrap">
     <p class="eyebrow">NOW PLAYING</p>
-    <h2 class="section-heading">最新動画</h2>
+    <h2 class="section-heading" data-i18n="videos-heading">最新動画</h2>
     <div class="track-list">
 
       <a class="track-row" href="https://youtube.com/live/Jb_4aLS5Lck" target="_blank" rel="noopener">
@@ -477,7 +507,7 @@
 
     </div>
     <a class="track-more" href="https://www.youtube.com/playlist?list=PLTG66G1e660jdVFHfngmVNd9GvSWiecMF" target="_blank" rel="noopener">
-      <span>▸ プレイリストを全部見る</span>
+      <span data-i18n="playlist-link">▸ プレイリストを全部見る</span>
       <span>→</span>
     </a>
   </div>
@@ -486,7 +516,7 @@
 <section class="links">
   <div class="wrap">
     <p class="eyebrow">CONNECT</p>
-    <h2 class="section-heading">つながる場所</h2>
+    <h2 class="section-heading" data-i18n="connect-heading">つながる場所</h2>
     <div class="link-grid">
 
       <a class="link-card" href="https://www.youtube.com/channel/UCklMWopjIFk57JWiN_zoojg" target="_blank" rel="noopener">
@@ -498,7 +528,7 @@
         </span>
         <span class="link-text">
           <p class="link-name">YouTube</p>
-          <p class="link-sub">wadoru PlayGaming — 実況動画はこちら</p>
+          <p class="link-sub" data-i18n="yt-sub">wadoru PlayGaming — 実況動画はこちら</p>
         </span>
         <svg class="link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H9M17 7V15"/></svg>
       </a>
@@ -510,8 +540,8 @@
           </svg>
         </span>
         <span class="link-text">
-          <p class="link-name">X (旧Twitter)</p>
-          <p class="link-sub">@wadoru_PG — 日常のつぶやき・告知</p>
+          <p class="link-name" data-i18n="x-name">X (旧Twitter)</p>
+          <p class="link-sub" data-i18n="x-sub">@wadoru_PG — 日常のつぶやき・告知</p>
         </span>
         <svg class="link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H9M17 7V15"/></svg>
       </a>
@@ -527,7 +557,7 @@
         </span>
         <span class="link-text">
           <p class="link-name">note</p>
-          <p class="link-sub">じっくり書いた記事はこちら</p>
+          <p class="link-sub" data-i18n="note-sub">じっくり書いた記事はこちら</p>
         </span>
         <svg class="link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H9M17 7V15"/></svg>
       </a>
@@ -545,6 +575,54 @@
 
 <script>
 (function () {
+  var I18N = {
+    ja: {
+      "meta-desc": "wadoru PlayGaming — リズムゲームを中心にYouTubeで実況・ライブ配信をするゲーマー、wadoruのページ。",
+      "hero-sub": "趣味でゲームの発信をしているゲーマーです。<br>YouTubeを中心に、ライブ配信や動画投稿を行っています。<br>X・noteでは、マイペースに活動しています。",
+      "videos-heading": "最新動画",
+      "playlist-link": "▸ プレイリストを全部見る",
+      "connect-heading": "つながる場所",
+      "yt-sub": "wadoru PlayGaming — 実況動画はこちら",
+      "x-name": "X (旧Twitter)",
+      "x-sub": "@wadoru_PG — 日常のつぶやき・告知",
+      "note-sub": "じっくり書いた記事はこちら"
+    },
+    en: {
+      "meta-desc": "wadoru PlayGaming — the page for wadoru, a gamer who streams and posts rhythm game content on YouTube.",
+      "hero-sub": "A gamer sharing gameplay as a hobby.<br>Mostly live streams and videos, on YouTube.<br>Casual updates over on X and note.",
+      "videos-heading": "Latest Videos",
+      "playlist-link": "▸ View full playlist",
+      "connect-heading": "Connect",
+      "yt-sub": "wadoru PlayGaming — watch the gameplay videos",
+      "x-name": "X (Twitter)",
+      "x-sub": "@wadoru_PG — everyday posts & announcements",
+      "note-sub": "Long-form articles here"
+    }
+  };
+
+  function setLang(lang) {
+    if (!I18N[lang]) lang = "ja";
+    document.documentElement.lang = lang;
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var val = I18N[lang][el.getAttribute("data-i18n")];
+      if (val != null) el.innerHTML = val;
+    });
+    var meta = document.getElementById("meta-desc");
+    if (meta) meta.setAttribute("content", I18N[lang]["meta-desc"]);
+    document.querySelectorAll(".lang-toggle button").forEach(function (btn) {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+    try { localStorage.setItem("wadoru_lang", lang); } catch (e) {}
+  }
+
+  document.querySelectorAll(".lang-toggle button").forEach(function (btn) {
+    btn.addEventListener("click", function () { setLang(btn.dataset.lang); });
+  });
+
+  var savedLang = "ja";
+  try { savedLang = localStorage.getItem("wadoru_lang") || "ja"; } catch (e) {}
+  setLang(savedLang);
+
   // Google Cloud Console で YouTube Data API v3 を有効化し、HTTPリファラーをこのサイトの
   // ドメインに制限したAPIキーを発行して、下の値を置き換えてください。
   // 未設定のままなら、上の静的な2件がそのまま表示されます（フォールバック）。
