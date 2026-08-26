@@ -69,6 +69,7 @@
     margin: 0 0 14px;
   }
   .eyebrow::before { content: "▸"; color: var(--red); }
+  .eyebrow--blue::before { color: var(--blue); }
 
   /* ---------- HERO ---------- */
   .hero {
@@ -284,6 +285,9 @@
   .track-list {
     border-top: 2px solid var(--border);
   }
+  .track-group + .track-group {
+    margin-top: clamp(40px, 7vw, 64px);
+  }
   .track-row {
     display: flex;
     align-items: center;
@@ -306,18 +310,6 @@
     display: block;
   }
   .track-row:hover .track-thumb { border-color: var(--olive); }
-  .track-tag {
-    flex-shrink: 0;
-    font-family: "DotGothic16", monospace;
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    padding: 5px 9px;
-    border-radius: 2px;
-    border: 2px solid var(--border);
-    color: var(--muted);
-  }
-  .track-tag.live { color: var(--red); border-color: var(--red); }
-  .track-tag.video { color: var(--blue); border-color: var(--blue); }
   .track-main { min-width: 0; flex: 1; }
   .track-title {
     margin: 0 0 4px;
@@ -481,35 +473,63 @@
 
 <section class="tracks">
   <div class="wrap">
-    <p class="eyebrow">NOW PLAYING</p>
-    <h2 class="section-heading" data-i18n="videos-heading">最新動画</h2>
-    <div class="track-list">
 
-      <a class="track-row" href="https://youtube.com/live/Jb_4aLS5Lck" target="_blank" rel="noopener">
-        <img class="track-thumb" src="https://i.ytimg.com/vi/Jb_4aLS5Lck/mqdefault.jpg" alt="">
-        <span class="track-tag live">LIVE</span>
-        <span class="track-main">
-          <p class="track-title">シーズン20開始おめでとう！新譜面や新要素を遊んでいく！【DJMAX RESPECT V】</p>
-          <p class="track-game">DJMAX RESPECT V</p>
-        </span>
-        <span class="track-play">▶</span>
-      </a>
+    <div class="track-group">
+      <p class="eyebrow">ARCHIVE</p>
+      <h2 class="section-heading" data-i18n="archive-heading">最新アーカイブ</h2>
+      <div class="track-list" data-list="archive">
 
-      <a class="track-row" href="https://youtu.be/8eE3I05GDNw" target="_blank" rel="noopener">
-        <img class="track-thumb" src="https://i.ytimg.com/vi/8eE3I05GDNw/mqdefault.jpg" alt="">
-        <span class="track-tag video">VIDEO</span>
-        <span class="track-main">
-          <p class="track-title">Ghost Marija Animations Showcase【v6.4.0】</p>
-          <p class="track-game">Muse Dash</p>
-        </span>
-        <span class="track-play">▶</span>
-      </a>
+        <a class="track-row" href="https://youtube.com/live/Jb_4aLS5Lck" target="_blank" rel="noopener">
+          <img class="track-thumb" src="https://i.ytimg.com/vi/Jb_4aLS5Lck/mqdefault.jpg" alt="">
+          <span class="track-main">
+            <p class="track-title">シーズン20開始おめでとう！新譜面や新要素を遊んでいく！【DJMAX RESPECT V】</p>
+            <p class="track-game">DJMAX RESPECT V</p>
+          </span>
+          <span class="track-play">▶</span>
+        </a>
 
+        <a class="track-row" href="https://youtube.com/live/x0XExYZrFOY" target="_blank" rel="noopener">
+          <img class="track-thumb" src="https://i.ytimg.com/vi/x0XExYZrFOY/mqdefault.jpg" alt="">
+          <span class="track-main">
+            <p class="track-title">ノーミスの力を付けたい！特集クラシックをやっていく！【A Dance of Fire and Ice/ADOFAI】【Live 配信】</p>
+            <p class="track-game">A Dance of Fire and Ice/ADOFAI</p>
+          </span>
+          <span class="track-play">▶</span>
+        </a>
+
+      </div>
     </div>
-    <a class="track-more" href="https://www.youtube.com/playlist?list=PLTG66G1e660jdVFHfngmVNd9GvSWiecMF" target="_blank" rel="noopener">
-      <span data-i18n="playlist-link">▸ プレイリストを全部見る</span>
-      <span>→</span>
-    </a>
+
+    <div class="track-group">
+      <p class="eyebrow eyebrow--blue">PICKUP</p>
+      <h2 class="section-heading" data-i18n="pickup-heading">ピックアップ</h2>
+      <div class="track-list" data-list="pickup">
+
+        <a class="track-row" href="https://youtu.be/0PghxnonsgY" target="_blank" rel="noopener">
+          <img class="track-thumb" src="https://i.ytimg.com/vi/0PghxnonsgY/mqdefault.jpg" alt="">
+          <span class="track-main">
+            <p class="track-title">Diver Buro Animations【v6.0.0】</p>
+            <p class="track-game">Muse Dash</p>
+          </span>
+          <span class="track-play">▶</span>
+        </a>
+
+        <a class="track-row" href="https://youtu.be/zh_rwpjH2QU" target="_blank" rel="noopener">
+          <img class="track-thumb" src="https://i.ytimg.com/vi/zh_rwpjH2QU/mqdefault.jpg" alt="">
+          <span class="track-main">
+            <p class="track-title">Eniac vs Caine | BUM BIDDY - ONESHOT【FNF】</p>
+            <p class="track-game">FNF</p>
+          </span>
+          <span class="track-play">▶</span>
+        </a>
+
+      </div>
+      <a class="track-more" href="https://www.youtube.com/playlist?list=PLTG66G1e660jdVFHfngmVNd9GvSWiecMF" target="_blank" rel="noopener">
+        <span data-i18n="playlist-link">▸ プレイリストを全部見る</span>
+        <span>→</span>
+      </a>
+    </div>
+
   </div>
 </section>
 
@@ -579,7 +599,8 @@
     ja: {
       "meta-desc": "wadoru PlayGaming — リズムゲームを中心にYouTubeで実況・ライブ配信をするゲーマー、wadoruのページ。",
       "hero-sub": "趣味でゲームの発信をしているゲーマーです。<br>YouTubeを中心に、ライブ配信や動画投稿を行っています。<br>X・noteでは、マイペースに活動しています。",
-      "videos-heading": "最新動画",
+      "archive-heading": "最新アーカイブ",
+      "pickup-heading": "ピックアップ",
       "playlist-link": "▸ プレイリストを全部見る",
       "connect-heading": "つながる場所",
       "yt-sub": "wadoru PlayGaming — 実況動画はこちら",
@@ -590,7 +611,8 @@
     en: {
       "meta-desc": "wadoru PlayGaming — the page for wadoru, a gamer who streams and posts rhythm game content on YouTube.",
       "hero-sub": "A gamer sharing gameplay as a hobby.<br>Mostly live streams and videos, on YouTube.<br>Casual updates over on X and note.",
-      "videos-heading": "Latest Videos",
+      "archive-heading": "Latest Archive",
+      "pickup-heading": "Pickup",
       "playlist-link": "▸ View full playlist",
       "connect-heading": "Connect",
       "yt-sub": "wadoru PlayGaming — watch the gameplay videos",
@@ -629,23 +651,32 @@
   var YT_API_KEY = "AIzaSyC3JyYF4rlu9uMn-eOvBBjdNwuqWKGdBFY";
   var CHANNEL_ID = "UCklMWopjIFk57JWiN_zoojg";
   var UPLOADS_PLAYLIST_ID = "UU" + CHANNEL_ID.slice(2);
-  var VIDEO_PLAYLIST_ID = "PLTG66G1e660jdVFHfngmVNd9GvSWiecMF";
-  var MAX_LIVE = 2;
-  var MAX_PLAYLIST_VIDEOS = 2;
-  var LIVE_CANDIDATE_COUNT = 10; // 直近アップロードのうちライブ判定に使う候補数
+  var PICKUP_PLAYLIST_ID = "PLTG66G1e660jdVFHfngmVNd9GvSWiecMF";
+  var MAX_ARCHIVE = 3;
+  var MAX_PICKUP = 3;
+  var ARCHIVE_CANDIDATE_COUNT = 15; // 直近アップロードのうちアーカイブ判定に使う候補数
+  var PICKUP_CANDIDATE_COUNT = 50; // ランダム抽出の母数（プレイリスト取得上限）
 
   if (!YT_API_KEY || YT_API_KEY === "YOUR_YOUTUBE_API_KEY") return;
 
-  var listEl = document.querySelector(".track-list");
-  if (!listEl) return;
+  var archiveListEl = document.querySelector('.track-list[data-list="archive"]');
+  var pickupListEl = document.querySelector('.track-list[data-list="pickup"]');
 
   function fetchJSON(url) {
     return fetch(url).then(function (r) { return r.json(); });
   }
 
-  function fetchLiveTracks() {
+  function shuffle(arr) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    }
+    return arr;
+  }
+
+  function fetchArchiveTracks() {
     return fetchJSON("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=" +
-      LIVE_CANDIDATE_COUNT + "&playlistId=" + UPLOADS_PLAYLIST_ID + "&key=" + YT_API_KEY)
+      ARCHIVE_CANDIDATE_COUNT + "&playlistId=" + UPLOADS_PLAYLIST_ID + "&key=" + YT_API_KEY)
       .then(function (data) {
         var items = (data.items || []).filter(function (i) { return i.snippet && i.snippet.resourceId; });
         var ids = items.map(function (i) { return i.snippet.resourceId.videoId; }).join(",");
@@ -654,29 +685,33 @@
           .then(function (videoData) {
             return (videoData.items || [])
               .filter(function (v) { return v.liveStreamingDetails; })
-              .slice(0, MAX_LIVE)
-              .map(function (v) { return { id: v.id, title: v.snippet.title, isLive: true }; });
+              .slice(0, MAX_ARCHIVE)
+              .map(function (v) { return { id: v.id, title: v.snippet.title }; });
           });
       })
       .catch(function () { return []; });
   }
 
-  function fetchPlaylistVideos() {
+  function fetchPickupTracks() {
     return fetchJSON("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=" +
-      MAX_PLAYLIST_VIDEOS + "&playlistId=" + VIDEO_PLAYLIST_ID + "&key=" + YT_API_KEY)
+      PICKUP_CANDIDATE_COUNT + "&playlistId=" + PICKUP_PLAYLIST_ID + "&key=" + YT_API_KEY)
       .then(function (data) {
-        return (data.items || [])
-          .filter(function (i) { return i.snippet && i.snippet.resourceId; })
-          .map(function (i) { return { id: i.snippet.resourceId.videoId, title: i.snippet.title, isLive: false }; });
+        var items = (data.items || []).filter(function (i) { return i.snippet && i.snippet.resourceId; });
+        return shuffle(items)
+          .slice(0, MAX_PICKUP)
+          .map(function (i) { return { id: i.snippet.resourceId.videoId, title: i.snippet.title }; });
       })
       .catch(function () { return []; });
   }
 
-  Promise.all([fetchLiveTracks(), fetchPlaylistVideos()]).then(function (results) {
-    renderTracks(results[0].concat(results[1]));
-  });
+  if (archiveListEl) {
+    fetchArchiveTracks().then(function (tracks) { renderTracks(archiveListEl, tracks); });
+  }
+  if (pickupListEl) {
+    fetchPickupTracks().then(function (tracks) { renderTracks(pickupListEl, tracks); });
+  }
 
-  function renderTracks(tracks) {
+  function renderTracks(listEl, tracks) {
     if (!tracks.length) return;
     listEl.innerHTML = "";
     tracks.forEach(function (t) {
@@ -693,10 +728,6 @@
       thumb.src = "https://i.ytimg.com/vi/" + t.id + "/mqdefault.jpg";
       thumb.alt = "";
       row.appendChild(thumb);
-
-      var tag = document.createElement("span");
-      tag.className = "track-tag " + (t.isLive ? "live" : "video");
-      tag.textContent = t.isLive ? "LIVE" : "VIDEO";
 
       var main = document.createElement("span");
       main.className = "track-main";
@@ -717,7 +748,6 @@
       play.className = "track-play";
       play.textContent = "▶";
 
-      row.appendChild(tag);
       row.appendChild(main);
       row.appendChild(play);
       listEl.appendChild(row);
