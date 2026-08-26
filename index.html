@@ -682,21 +682,48 @@
   try { savedLang = localStorage.getItem("wadoru_lang") || "ja"; } catch (e) {}
   setLang(savedLang);
 
-  // Android は https リンクだけではアプリに直接遷移しないため、intent: URI に書き換える。
+  // Android は https リンクだけではアプリに直接遷移しないため、書き換える。
+  // 方式はブラウザエンジンで異なる:
+  //  - Chromium系(Chrome/Samsung Internet/Edge/Opera。Android利用の9割以上を占める)は
+  //    intent: 構文が使え、アプリ未インストール時も browser_fallback_url で自動的にブラウザへ戻れる。
+  //  - Firefox(Gecko)は intent: を解釈できないため未対応。代わりに各アプリが元々持つ
+  //    カスタムスキーム(vnd.youtube: / twitter:)に直接ジャンプさせる。ただし自動フォールバックの
+  //    仕組みがFirefoxに無いため、アプリ未インストール時は何も起きない可能性がある。
   // iOS は Universal Links (target="_blank" を外すだけ) で足りるのでそのまま。
   var isAndroid = /Android/i.test(navigator.userAgent);
+  var isChromiumAndroid = isAndroid && /Chrome\//.test(navigator.userAgent);
+  var isFirefoxAndroid = isAndroid && /Firefox\//.test(navigator.userAgent);
+
   function toIntentHref(url, pkg) {
     return "intent://" + url.replace(/^https?:\/\//, "") +
       "#Intent;package=" + pkg + ";scheme=https;S.browser_fallback_url=" + encodeURIComponent(url) + ";end";
   }
+  function extractYouTubeId(url) {
+    var m = url.match(/(?:youtu\.be\/|\/live\/|watch\?v=)([\w-]{11})/);
+    return m ? m[1] : null;
+  }
+  function extractXHandle(url) {
+    var m = url.match(/x\.com\/([^/?#]+)/);
+    return m ? m[1] : null;
+  }
   function androidizeLinks(root) {
-    if (!isAndroid) return;
-    root.querySelectorAll('a[href*="youtube.com/"], a[href*="youtu.be/"]').forEach(function (a) {
-      a.href = toIntentHref(a.href, "com.google.android.youtube");
-    });
-    root.querySelectorAll('a[href*="x.com/"]').forEach(function (a) {
-      a.href = toIntentHref(a.href, "com.twitter.android");
-    });
+    if (isChromiumAndroid) {
+      root.querySelectorAll('a[href*="youtube.com/"], a[href*="youtu.be/"]').forEach(function (a) {
+        a.href = toIntentHref(a.href, "com.google.android.youtube");
+      });
+      root.querySelectorAll('a[href*="x.com/"]').forEach(function (a) {
+        a.href = toIntentHref(a.href, "com.twitter.android");
+      });
+    } else if (isFirefoxAndroid) {
+      root.querySelectorAll('a[href*="youtube.com/"], a[href*="youtu.be/"]').forEach(function (a) {
+        var id = extractYouTubeId(a.href);
+        if (id) a.href = "vnd.youtube:" + id;
+      });
+      root.querySelectorAll('a[href*="x.com/"]').forEach(function (a) {
+        var handle = extractXHandle(a.href);
+        if (handle) a.href = "twitter://user?screen_name=" + handle;
+      });
+    }
   }
   androidizeLinks(document);
 
