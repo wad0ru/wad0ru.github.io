@@ -586,7 +586,7 @@
         <svg class="link-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H9M17 7V15"/></svg>
       </a>
 
-      <a class="link-card" href="https://x.com/wadoru_PG" target="_blank" rel="noopener">
+      <a class="link-card" href="https://x.com/wadoru_PG">
         <span class="link-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f3efd9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 5L19 19M19 5L5 19"/>
@@ -681,6 +681,24 @@
   var savedLang = "ja";
   try { savedLang = localStorage.getItem("wadoru_lang") || "ja"; } catch (e) {}
   setLang(savedLang);
+
+  // Android は https リンクだけではアプリに直接遷移しないため、intent: URI に書き換える。
+  // iOS は Universal Links (target="_blank" を外すだけ) で足りるのでそのまま。
+  var isAndroid = /Android/i.test(navigator.userAgent);
+  function toIntentHref(url, pkg) {
+    return "intent://" + url.replace(/^https?:\/\//, "") +
+      "#Intent;package=" + pkg + ";scheme=https;S.browser_fallback_url=" + encodeURIComponent(url) + ";end";
+  }
+  function androidizeLinks(root) {
+    if (!isAndroid) return;
+    root.querySelectorAll('a[href*="youtube.com/"], a[href*="youtu.be/"]').forEach(function (a) {
+      a.href = toIntentHref(a.href, "com.google.android.youtube");
+    });
+    root.querySelectorAll('a[href*="x.com/"]').forEach(function (a) {
+      a.href = toIntentHref(a.href, "com.twitter.android");
+    });
+  }
+  androidizeLinks(document);
 
   // Google Cloud Console で YouTube Data API v3 を有効化し、HTTPリファラーをこのサイトの
   // ドメインに制限したAPIキーを発行して、下の値を置き換えてください。
@@ -787,6 +805,7 @@
       row.appendChild(play);
       listEl.appendChild(row);
     });
+    androidizeLinks(listEl);
   }
 })();
 </script>
